@@ -50,9 +50,9 @@ Stealth Liquidator solves a fundamental problem in DeFi liquidation markets: **f
 │                                                         │
 │  1. Connect wallet (ArgentX / Ready)                    │
 │  2. Enter bid amount ................ e.g. 1000         │
-│  3. Enter secret .................... e.g. 12345        │
-│  4. Click [Submit Commitment]                           │
-│  5. Wallet popup appears → Approve                      │
+│         │
+│  3. Click [Submit Commitment]                           │
+│  4. Wallet popup appears → Approve                      │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │ ✦ SAVE  Commitment Hash → 0x35af92d5...e5689    │   │
