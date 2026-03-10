@@ -1,0 +1,10 @@
+# ...
+[sncast.myprofile]
+account = "user"
+accounts-file = "~/my_accounts.json"
+url = "http://127.0.0.1:5050/rpc"
+# ...
+
+[sncast.default]
+url = "https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_10/kfBkiwD47kFq0eyGIGpbN"
+account = "new_account"

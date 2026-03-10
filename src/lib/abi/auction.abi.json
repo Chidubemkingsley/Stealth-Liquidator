@@ -1,0 +1,170 @@
+[
+  {
+    "type": "constructor",
+    "name": "constructor",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "submit_commitment",
+    "inputs": [
+      {
+        "name": "commitment",
+        "type": "core::felt252"
+      }
+    ],
+    "outputs": [],
+    "state_mutability": "external"
+  },
+  {
+    "type": "function",
+    "name": "reveal_bid",
+    "inputs": [
+      {
+        "name": "bid",
+        "type": "core::felt252"
+      },
+      {
+        "name": "secret",
+        "type": "core::felt252"
+      }
+    ],
+    "outputs": [],
+    "state_mutability": "external"
+  },
+  {
+    "type": "function",
+    "name": "advance_phase",
+    "inputs": [],
+    "outputs": [],
+    "state_mutability": "external"
+  },
+  {
+    "type": "function",
+    "name": "get_phase",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "core::integer::u8"
+      }
+    ],
+    "state_mutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "get_commitment",
+    "inputs": [
+      {
+        "name": "bidder",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "core::felt252"
+      }
+    ],
+    "state_mutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "get_reveal",
+    "inputs": [
+      {
+        "name": "bidder",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "core::felt252"
+      }
+    ],
+    "state_mutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "update_merkle_root",
+    "inputs": [
+      {
+        "name": "root",
+        "type": "core::felt252"
+      }
+    ],
+    "outputs": [],
+    "state_mutability": "external"
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::auction::Auction::CommitmentSubmitted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "bidder",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "commitment",
+        "type": "core::felt252",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::auction::Auction::BidRevealed",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "bidder",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      },
+      {
+        "name": "bid",
+        "type": "core::felt252",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::auction::Auction::PhaseChanged",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "new_phase",
+        "type": "core::integer::u8",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::auction::Auction::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "CommitmentSubmitted",
+        "type": "stealth_liquidator::auction::Auction::CommitmentSubmitted",
+        "kind": "nested"
+      },
+      {
+        "name": "BidRevealed",
+        "type": "stealth_liquidator::auction::Auction::BidRevealed",
+        "kind": "nested"
+      },
+      {
+        "name": "PhaseChanged",
+        "type": "stealth_liquidator::auction::Auction::PhaseChanged",
+        "kind": "nested"
+      }
+    ]
+  }
+]

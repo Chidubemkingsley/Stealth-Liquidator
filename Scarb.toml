@@ -1,0 +1,11 @@
+[package]
+name = "stealth_liquidator"
+version = "0.1.0"
+edition = "2024_07"
+
+[[target.starknet-contract]]
+sierra = true
+
+[dependencies]
+starknet = ">=2.15.0"
+sncast_std = "0.33.0"

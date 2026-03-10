@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070d14;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1520;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b97a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d9e6b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-strong">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Grid lines -->
+  <g stroke="#1e2d3d" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="60" x2="1200" y2="60" />
+    <line x1="0" y1="120" x2="1200" y2="120" />
+    <line x1="0" y1="180" x2="1200" y2="180" />
+    <line x1="0" y1="240" x2="1200" y2="240" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="360" x2="1200" y2="360" />
+    <line x1="0" y1="420" x2="1200" y2="420" />
+    <line x1="0" y1="480" x2="1200" y2="480" />
+    <line x1="0" y1="540" x2="1200" y2="540" />
+    <line x1="0" y1="600" x2="1200" y2="600" />
+    <line x1="60" y1="0" x2="60" y2="630" />
+    <line x1="120" y1="0" x2="120" y2="630" />
+    <line x1="180" y1="0" x2="180" y2="630" />
+    <line x1="240" y1="0" x2="240" y2="630" />
+    <line x1="300" y1="0" x2="300" y2="630" />
+    <line x1="360" y1="0" x2="360" y2="630" />
+    <line x1="420" y1="0" x2="420" y2="630" />
+    <line x1="480" y1="0" x2="480" y2="630" />
+    <line x1="540" y1="0" x2="540" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="660" y1="0" x2="660" y2="630" />
+    <line x1="720" y1="0" x2="720" y2="630" />
+    <line x1="780" y1="0" x2="780" y2="630" />
+    <line x1="840" y1="0" x2="840" y2="630" />
+    <line x1="900" y1="0" x2="900" y2="630" />
+    <line x1="960" y1="0" x2="960" y2="630" />
+    <line x1="1020" y1="0" x2="1020" y2="630" />
+    <line x1="1080" y1="0" x2="1080" y2="630" />
+    <line x1="1140" y1="0" x2="1140" y2="630" />
+  </g>
+
+  <!-- Glow orb top right -->
+  <circle cx="1000" cy="150" r="200" fill="#10b97a" opacity="0.04" />
+  <circle cx="1000" cy="150" r="120" fill="#10b97a" opacity="0.06" />
+
+  <!-- Glow orb bottom left -->
+  <circle cx="200" cy="500" r="180" fill="#8b5cf6" opacity="0.05" />
+  <circle cx="200" cy="500" r="100" fill="#8b5cf6" opacity="0.07" />
+
+  <!-- Shield icon -->
+  <g transform="translate(100, 180)" filter="url(#glow)">
+    <path d="M40 0 L80 15 L80 45 C80 65 62 80 40 88 C18 80 0 65 0 45 L0 15 Z"
+          fill="none" stroke="#10b97a" stroke-width="3" opacity="0.9"/>
+    <path d="M40 8 L72 21 L72 45 C72 61 56 74 40 81 C24 74 8 61 8 45 L8 21 Z"
+          fill="#10b97a" opacity="0.1"/>
+    <!-- Lock icon inside shield -->
+    <rect x="28" y="42" width="24" height="18" rx="3" fill="#10b97a" opacity="0.8"/>
+    <path d="M32 42 L32 36 C32 30 48 30 48 36 L48 42" fill="none" stroke="#10b97a" stroke-width="2.5" opacity="0.8"/>
+    <circle cx="40" cy="51" r="3" fill="#070d14"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="210" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="white" letter-spacing="-2">Stealth</text>
+  <text x="210" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" letter-spacing="-2">
+    <tspan fill="#10b97a">Liquidator</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="210" y="395" font-family="system-ui, -apple-system, sans-serif" font-size="26" fill="#6b7f94" letter-spacing="0">Privacy-First Liquidation Protocol</text>
+
+  <!-- Tags -->
+  <g transform="translate(210, 430)">
+    <!-- ZK tag -->
+    <rect x="0" y="0" width="120" height="36" rx="18" fill="#10b97a" opacity="0.15"/>
+    <rect x="0" y="0" width="120" height="36" rx="18" fill="none" stroke="#10b97a" stroke-width="1" opacity="0.4"/>
+    <text x="60" y="23" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#10b97a" text-anchor="middle">ZK-Verified</text>
+
+    <!-- Starknet tag -->
+    <rect x="135" y="0" width="130" height="36" rx="18" fill="#8b5cf6" opacity="0.15"/>
+    <rect x="135" y="0" width="130" height="36" rx="18" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.4"/>
+    <text x="200" y="23" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#8b5cf6" text-anchor="middle">Starknet</text>
+
+    <!-- Groth16 tag -->
+    <rect x="280" y="0" width="120" height="36" rx="18" fill="#1e2d3d" opacity="0.8"/>
+    <rect x="280" y="0" width="120" height="36" rx="18" fill="none" stroke="#2d4a63" stroke-width="1"/>
+    <text x="340" y="23" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#6b7f94" text-anchor="middle">Groth16</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="40" fill="#0a1520" opacity="0.8"/>
+  <text x="100" y="615" font-family="system-ui, sans-serif" font-size="14" fill="#3d5a73">Cairo · Noir · ZK Proofs · On-chain Verification</text>
+  <text x="1100" y="615" font-family="system-ui, sans-serif" font-size="14" fill="#3d5a73" text-anchor="end">v0.1.0</text>
+
+  <!-- Decorative right side - circuit lines -->
+  <g stroke="#1e3a2a" stroke-width="1.5" opacity="0.6" fill="none">
+    <polyline points="850,200 900,200 900,250 980,250"/>
+    <polyline points="980,250 1050,250 1050,180 1100,180"/>
+    <polyline points="850,300 920,300 920,350 1000,350 1000,300 1100,300"/>
+    <polyline points="850,400 930,400 930,450 1050,450"/>
+    <circle cx="900" cy="200" r="4" fill="#10b97a" opacity="0.6"/>
+    <circle cx="1050" cy="180" r="4" fill="#10b97a" opacity="0.6"/>
+    <circle cx="920" cy="350" r="4" fill="#10b97a" opacity="0.4"/>
+    <circle cx="1000" cy="300" r="4" fill="#8b5cf6" opacity="0.6"/>
+    <circle cx="930" cy="450" r="4" fill="#8b5cf6" opacity="0.4"/>
+  </g>
+</svg>

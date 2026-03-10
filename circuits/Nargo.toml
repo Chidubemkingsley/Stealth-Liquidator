@@ -1,0 +1,7 @@
+[package]
+name = "stealth_liquidator"
+type = "bin"
+authors = ["Emperor Caesar"]
+compiler_version = ">=0.36.0"
+
+[dependencies]

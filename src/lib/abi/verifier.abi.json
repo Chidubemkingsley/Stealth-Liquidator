@@ -1,0 +1,113 @@
+[
+  {
+    "type": "constructor",
+    "name": "constructor",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "core::bool",
+    "variants": [
+      {
+        "name": "False",
+        "type": "()"
+      },
+      {
+        "name": "True",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "verify_proof",
+    "inputs": [
+      {
+        "name": "proof",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "public_inputs",
+        "type": "core::array::Array::<core::felt252>"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "core::bool"
+      }
+    ],
+    "state_mutability": "external"
+  },
+  {
+    "type": "function",
+    "name": "is_verified",
+    "inputs": [
+      {
+        "name": "commitment",
+        "type": "core::felt252"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "core::bool"
+      }
+    ],
+    "state_mutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::verifier::Verifier::ProofVerified",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "commitment",
+        "type": "core::felt252",
+        "kind": "data"
+      },
+      {
+        "name": "caller",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::verifier::Verifier::ProofRejected",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "commitment",
+        "type": "core::felt252",
+        "kind": "data"
+      },
+      {
+        "name": "caller",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "stealth_liquidator::verifier::Verifier::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "ProofVerified",
+        "type": "stealth_liquidator::verifier::Verifier::ProofVerified",
+        "kind": "nested"
+      },
+      {
+        "name": "ProofRejected",
+        "type": "stealth_liquidator::verifier::Verifier::ProofRejected",
+        "kind": "nested"
+      }
+    ]
+  }
+]
