@@ -84,10 +84,10 @@ Stealth Liquidator solves a fundamental problem in DeFi liquidation markets: **f
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
 │  1. Enter EXACT bid from Phase 1 .... e.g. 1000        │
-│  2. Enter EXACT secret from Phase 1 . e.g. 12345       │
-│  3. Click [Reveal Bid]                                  │
-│  4. Wallet popup appears → Approve                      │
-│  5. Cairo verifies Poseidon(bid, secret) on-chain       │
+│        │
+│  2. Click [Reveal Bid]                                  │
+│  3. Wallet popup appears → Approve                      │
+│  4. Cairo verifies Poseidon(bid, secret) on-chain       │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
 │  │ ✦ Reveal Transaction Hash confirmed             │   │
