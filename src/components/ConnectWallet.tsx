@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Wallet, LogOut, Zap } from "lucide-react";
 import { AccountInterface } from "starknet";
-
 import { connectWallet, reconnectWallet, disconnectWallet } from "@/lib/wallet";
 import { truncateAddress } from "@/lib/starknet";
 
@@ -13,45 +12,34 @@ interface ConnectWalletProps {
   onDisconnect?: () => void;
 }
 
-export default function ConnectWallet({
-  onConnect,
-  onDisconnect,
-}: ConnectWalletProps) {
+export default function ConnectWallet({ onConnect, onDisconnect }: ConnectWalletProps) {
   const [address, setAddress] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const reconnectAttempted = useRef(false);
 
-  /**
-   * Silent wallet reconnect
-   * Runs only in browser
-   */
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (reconnectAttempted.current) return;
+    reconnectAttempted.current = true;
 
     async function reconnect() {
       try {
         const result = await reconnectWallet();
-
         if (result) {
           setAddress(result.address);
           onConnect?.(result.account, result.address);
         }
-      } catch (err) {
-        console.error("Reconnect failed:", err);
+      } catch {
+        // silent fail — user will click connect manually
       }
     }
 
     reconnect();
-  }, [onConnect]);
+  }, []); // empty deps — runs once only
 
-  /**
-   * Manual wallet connection
-   */
   async function handleConnect() {
     setLoading(true);
-
     try {
       const result = await connectWallet();
-
       if (result) {
         setAddress(result.address);
         onConnect?.(result.account, result.address);
@@ -63,22 +51,17 @@ export default function ConnectWallet({
     }
   }
 
-  /**
-   * Disconnect wallet
-   */
   async function handleDisconnect() {
     try {
       await disconnectWallet();
       setAddress(null);
       onDisconnect?.();
+      reconnectAttempted.current = false;
     } catch (err) {
       console.error("Wallet disconnect failed:", err);
     }
   }
 
-  /**
-   * Wallet Connected UI
-   */
   if (address) {
     return (
       <motion.div
@@ -92,7 +75,6 @@ export default function ConnectWallet({
             {truncateAddress(address)}
           </span>
         </div>
-
         <button
           aria-label="Disconnect wallet"
           onClick={handleDisconnect}
@@ -104,9 +86,6 @@ export default function ConnectWallet({
     );
   }
 
-  /**
-   * Connect Wallet Button UI
-   */
   return (
     <motion.button
       onClick={handleConnect}
@@ -115,12 +94,7 @@ export default function ConnectWallet({
       whileTap={{ scale: 0.98 }}
       className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 font-semibold text-primary-foreground transition-all hover:glow-primary disabled:opacity-50"
     >
-      {loading ? (
-        <Zap className="h-4 w-4 animate-spin" />
-      ) : (
-        <Wallet className="h-4 w-4" />
-      )}
-
+      {loading ? <Zap className="h-4 w-4 animate-spin" /> : <Wallet className="h-4 w-4" />}
       {loading ? "Connecting..." : "Connect Wallet"}
     </motion.button>
   );
