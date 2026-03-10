@@ -264,12 +264,12 @@ Then update starknet.ts with the new address.
 
 | Contract | Address |
 |----------|---------|
-| Auction | `0x02191d671922e28e1e12bba1d059bdd827d835d510cd015469080e5280041dc1` |
-| Verifier | `0x056dfd41b229ce20bf70e379928257d5559a016c1c37d2f39c1fad10820effbd` |
+| Auction | `0x037903c842e00fe5625c688660b289bc98662b776127a21c3d1b34ddc64eb63b` |
+| Verifier | `0x003ac3656cb749a10b27830bed9f70f954ae8a890d1dcc67038c6c041f23f738` |
 
 View on Starkscan:
-- [Auction Contract](https://sepolia.voyager.online/tx/0x376186a92f3a22cb4f6d37ea8bd1372f9c106c964f528c31b072d3e2228e3ca)
-- [Verifier Contract](https://sepolia.voyager.online/tx/0x6f62d110da638d158c19666efc2f16b886dd4e1dd5c702eb3fee11ac8e428c0)
+- [Auction Contract](https://sepolia.voyager.online/contract/0x037903c842e00fe5625c688660b289bc98662b776127a21c3d1b34ddc64eb63b)
+- [Verifier Contract](https://sepolia.voyager.online/contract/0x003ac3656cb749a10b27830bed9f70f954ae8a890d1dcc67038c6c041f23f738)
 
 ---
 
