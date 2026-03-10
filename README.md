@@ -12,7 +12,7 @@ A privacy-first sealed-bid liquidation protocol built on Starknet, powered by Ze
 
 ## Video Demo
 
-[Demo Video](  )
+[Demo Video](https://youtu.be/t1XsTsJvf-8)
 
 ## Table of Contents
 
@@ -35,6 +35,114 @@ A privacy-first sealed-bid liquidation protocol built on Starknet, powered by Ze
 ## Overview
 
 Stealth Liquidator solves a fundamental problem in DeFi liquidation markets: **front-running and bid manipulation**.
+
+### The Guide
+
+```
+┌─────────────────────────────────────────────────────────┐
+│           STEALTH LIQUIDATOR — USER FLOW GUIDE          │
+│                  Starknet Sepolia Testnet                │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│  01  PHASE 1 — SUBMIT COMMITMENT              🔒        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  1. Connect wallet (ArgentX / Ready)                    │
+│  2. Enter bid amount ................ e.g. 1000         │
+│  3. Enter secret .................... e.g. 12345        │
+│  4. Click [Submit Commitment]                           │
+│  5. Wallet popup appears → Approve                      │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✦ SAVE  Commitment Hash → 0x35af92d5...e5689    │   │
+│  │ ✦ SAVE  Transaction Hash → view on Starkscan    │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ⚠  Save both hashes — needed in next phase            │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  02  PHASE 2 — ADVANCE TO REVEAL              ⚡        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  1. Scroll to Trigger Liquidation card                  │
+│  2. Click [Start Liquidation]                           │
+│  3. Wallet popup appears → Approve                      │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✦ Phase banner updates → Phase 2 — Reveal       │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ⚠  Only the contract owner wallet can do this         │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  03  PHASE 2 — REVEAL BID                     👁        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  1. Enter EXACT bid from Phase 1 .... e.g. 1000        │
+│  2. Enter EXACT secret from Phase 1 . e.g. 12345       │
+│  3. Click [Reveal Bid]                                  │
+│  4. Wallet popup appears → Approve                      │
+│  5. Cairo verifies Poseidon(bid, secret) on-chain       │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✦ Reveal Transaction Hash confirmed             │   │
+│  │ ✦ On-chain Poseidon hash verification passed    │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+│  ⚠  Bid + secret must exactly match Phase 1            │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│  04  PHASE 3 — FINALIZE LIQUIDATION           🔥        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  1. Refresh browser                                     │
+│  2. Reconnect wallet if prompted                        │
+│  3. Scroll to Trigger Liquidation card                  │
+│  4. Click [Start Liquidation]                           │
+│  5. Wallet popup appears → Approve                      │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │ ✦ Phase 3 — Finalized ✓                         │   │
+│  │ ✦ Liquidation executed on-chain                 │   │
+│  └─────────────────────────────────────────────────┘   │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                  ✓ FLOW COMPLETE                        │
+│         Sealed bid liquidation executed on              │
+│         Starknet Sepolia via ZK commit-reveal           │
+└─────────────────────────────────────────────────────────┘
+
+
+CONTRACTS
+─────────────────────────────────────────────────────────
+  Auction   0x00119fbfe45406959f52fe021d80f84cb7d5fa575...
+  Verifier  0x056dfd41b229ce20bf70e379928257d5559a016c1...
+  Network   Starknet Sepolia Testnet
+─────────────────────────────────────────────────────────
+```
+
+### What is the actual goal of this? (The "Why")
+This system solves Front-running and Price Manipulation.
+In a Normal Auction: If I see you bid $100, I can bid $101 at the last second. I "snipe" you because I saw your data.
+In YOUR Auction (Commit-Reveal): I see you submitted a "Commitment" (a scrambled hash), but I have no idea if you bid $10 or $1,000,000. I have to bid my true value without knowing yours.
+Fairness: It creates a "Sealed Bid" environment where the highest bidder wins based on their own valuation, not by reacting to others.
+
+### How does this "Better One's Life"?
+This technology is the foundation for Fair Digital Economies:
+Government/Corporate Tenders: Prevents corruption. Companies submit sealed bids for a contract (like building a bridge), and no one can "leak" the competitors' prices to their friends.
+Domain Name Auctions (like ENS): Stops "squatters" from seeing what names people want and buying them first to upsell them.
+Fair NFT Launches: Prevents "whales" from seeing which NFTs are rare and manipulating the minting process.
+Private Voting: You can "Commit" your vote (Phase 1) and "Reveal" it (Phase 2). Everyone can see the final count is correct, but no one knew who you voted for while the polls were still open.
 
 In traditional on-chain liquidation systems, every bidder can see every other bid in the mempool. This allows:
 - Front-running by bots
