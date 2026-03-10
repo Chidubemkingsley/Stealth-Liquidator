@@ -2,47 +2,63 @@ import { poseidonHashMany } from "micro-starknet";
 import { AccountInterface } from "starknet";
 import { getAuctionContract } from "@/lib/contracts";
 
+/**
+ * SHARED CONFIGURATION
+ * These must match your prover.toml exactly for the hashes to align.
+ */
+const SHARED_SECRET = BigInt("12345");
+
+/**
+ * Generates the Poseidon hash of the bid and the secret.
+ * Note: micro-starknet's poseidonHashMany expects an array of bigints.
+ */
 export function generateCommitment(bid: bigint, secret: bigint): bigint {
   return poseidonHashMany([bid, secret]);
 }
 
-export function generateSecret(): bigint {
-  const array = new Uint8Array(31);
-  crypto.getRandomValues(array);
-  return BigInt("0x" + Array.from(array).map((b) => b.toString(16).padStart(2, "0")).join(""));
-}
-
+/**
+ * PHASE 1: Submit Commitment
+ * Uses the hardcoded secret so anyone cloning the repo generates the same hash.
+ */
 export async function submitCommitment(
   account: AccountInterface,
-  bidAmount: bigint,
-  manualSecret?: bigint
-): Promise<{ commitment: bigint; secret: bigint; txHash: string }> {
-  const secret = manualSecret ?? generateSecret();
+  bidAmount: bigint
+): Promise<{ commitment: bigint; txHash: string }> {
+  const contract = getAuctionContract(account);
+  
+  // Use the secret from prover.toml
+  const secret = SHARED_SECRET;
   const commitment = generateCommitment(bidAmount, secret);
 
-  const contract = getAuctionContract(account);
+  console.log("Submitting Commitment:", "0x" + commitment.toString(16));
+  
   const tx = await contract.submit_commitment(commitment);
-
-  localStorage.setItem(`bid_secret_${commitment.toString()}`, secret.toString());
-  localStorage.setItem(`bid_value_${commitment.toString()}`, bidAmount.toString());
-
-  return { commitment, secret, txHash: tx.transaction_hash };
+  return { commitment, txHash: tx.transaction_hash };
 }
 
+/**
+ * PHASE 2: Reveal Bid
+ * Re-calculates the hash using the hardcoded secret to verify before sending on-chain.
+ */
 export async function revealBid(
   account: AccountInterface,
   bidAmount: bigint,
   commitment: bigint
 ): Promise<string> {
-  const storedSecret = localStorage.getItem(`bid_secret_${commitment.toString()}`);
-  if (!storedSecret) throw new Error("Secret not found — cannot reveal bid");
-
-  const secret = BigInt(storedSecret);
-  const recomputed = generateCommitment(bidAmount, secret);
-  if (recomputed !== commitment) throw new Error("Local commitment verification failed");
-
   const contract = getAuctionContract(account);
-  const tx = await contract.reveal_bid(bidAmount, secret);
+  
+  // Use the same hardcoded secret
+  const secret = SHARED_SECRET;
+  
+  // Safety check: Does (Your Input Bid + 12345) == The Hash on the Blockchain?
+  const recomputed = generateCommitment(bidAmount, secret);
+  
+  if (recomputed !== commitment) {
+    const expected = "0x" + commitment.toString(16);
+    const actual = "0x" + recomputed.toString(16);
+    throw new Error(`Hash Mismatch! \nExpected: ${expected}\nGenerated: ${actual}\nDid you enter the correct bid amount?`);
+  }
 
+  const tx = await contract.reveal_bid(bidAmount, secret);
   return tx.transaction_hash;
 }

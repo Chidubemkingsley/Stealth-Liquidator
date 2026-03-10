@@ -8,11 +8,11 @@ A privacy-first sealed-bid liquidation protocol built on Starknet, powered by Ze
 
 ## Project Website
 
-![Stealth Liquidator](https://stealth-liquidator-7inn.vercel.app/)
+[Stealth Liquidator](https://stealth-liquidator-7inn.vercel.app/)
 
 ## Video Demo
 
-![Demo Video](  )
+[Demo Video](  )
 
 ## Table of Contents
 
